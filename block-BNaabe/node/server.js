@@ -8,14 +8,14 @@ let path = require("path");
 
 
 
-console.log(__filename);
+// console.log(__filename);
 
-console.log(__dirname + '/app.js');
+// console.log(__dirname + '/app.js');
 
 
-console.log('./index.html');
+// console.log('./index.html');
 
-var indexPath = path.join(__dirname, 'index.html');
+// var indexPath = path.join(__dirname, 'index.html');
 
 
 let server = http.createServer(handleRequest);
@@ -27,35 +27,14 @@ let server = http.createServer(handleRequest);
 //       result += chunk;
 //     });
 //     req.on("end", () => {
-//       res.writeHead(201, "Content-Type : application/json");
-//     //   console.log(result);
-//       res.end(result);
-      
+        //   res.statusCode = 201;
+        //   var parseData = qs.parse(result);
+        //   res.end(JSON.stringify(parseData));
 //     });
 //   }
 // }
 
 
-// function handleRequest(req, res) {
-//   if (req.method === "POST" && req.url === "/") {
-//     let result = "";
-//     req.on("data", (chunk) => {
-//       result += chunk;
-//     });
-//     req.on("end", () => {
-//       res.statusCode = 201;
-//       var parseData = qs.parse(result);
-//       res.end(JSON.stringify(parseData)); 
-//       console.log(`Name of the captain is ${result.captain}`);
-//     });
-//   }
-// }
-
-
-
-// server.listen(5555, () => {
-//   console.log("Listening for a request on the 5555 port ");
-// });
 
 
 
