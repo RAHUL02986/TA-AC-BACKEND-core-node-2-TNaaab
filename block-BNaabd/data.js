@@ -5,7 +5,6 @@ var qs = require('querystring');
 var server = http.createServer(handleRequest);
 
 function handleRequest(req, res){
-    var dataFormate = req.headers("content-type");
     var store = '';
 
     req.on('data',(chunk) => {
@@ -13,18 +12,18 @@ function handleRequest(req, res){
     });
 
     req.on('end',()=>{
-      if(dataFormate === "application/json"){
-
-        var parsedData = JSON.parse(store);
-
-        res.end(store);
+        console.log(store);
+      if(req.method === "POST" && req.url === "/json"){
+        res.setHeader('content-type', 'application/json');
+    res.end(store);
       }
 
-      if(dataFormate === "application/x-www-form-urlencoded"){
+      if(req.method ==="POST" && req.url === "/form"){
+        res.setHeader('content-type', 'application/x-www-form-urlencoded');
+        console.log(store);
 
-       var parsedData =  qs.parse(store);
-
-       res.end(JSON.stringify(store));
+       var formData = qs.parse(store);
+       res.end (JSON.stringify(formData));
       }
     })
 }
