@@ -19,7 +19,7 @@ function handleRequest(req ,res){
         if(req.method === "GET" && req.url === "/form"){
           res.setHeader('content-type', 'text/html');
 
-         var fsData= fs.createReadStream("./index.html" ).pipe(res);
+        fs.createReadStream("./index.html" ).pipe(res);
 
         }
 
@@ -30,6 +30,7 @@ function handleRequest(req ,res){
             res.write(`<h3>${parsedData.email}</h3>`);
             res.write(`<p>${parsedData.age}</p>`);
             res.end();
+            console.log(store)
           }
         });
       
