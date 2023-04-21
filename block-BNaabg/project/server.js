@@ -26,13 +26,13 @@ function handleRequest(req, res){
     req.on('end', ()=>{
 
         if(req.method === "POST" && req.url=== "/users"){
-            var username = (store).username;
+            var username = JSON.parse(store).username;
             fs.open(userPath + username + ".json", "wx", (err, fd) => {
                 if (err) return console.log(err);
                 fs.writeFile(fd, store, (err) => {
                 if (err) return console.log(err);
                 fs.close(fd, () => {
-                    return res.end(`${username} created successfully`);
+                 return res.end(`${username} created successfully`);
                 });
                 });
             });
@@ -42,9 +42,10 @@ function handleRequest(req, res){
                var username = parsedUrl.query.username;
 
                fs.readFile(userPath + username + ".json",(err,content)=>{
-                if(err) console.log(err);
+                if(err) return console.log(err);
+
                 res.setHeader('content-type', 'application/json');
-                return res.end(content);
+              return   res.end(content);
                })
 
        } 
@@ -58,7 +59,7 @@ function handleRequest(req, res){
             fs.writeFile(fd, store, (err) => {
                 if (err) return console.log(err);
                 fs.close(fd, () => {
-                return res.end(`${username} updated successfully`);
+            return res.end(`${username} updated successfully`);
                 });
             });
             });
@@ -72,12 +73,12 @@ function handleRequest(req, res){
         var username = parsedUrl.query.username;
         fs.unlink(userPath + username + ".json", (err) => {
             if (err) return console.log(err);
-            return res.end(`${username} deleted successfully`);
+           return res.end(`${username} deleted successfully`);
         });
     }
 
     res.statusCode = 404;
-    res.end("Page not found");
+    res.end("Page Not Found");
 });
 
 
